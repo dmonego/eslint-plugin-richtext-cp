@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "eslint": "^4.18.2",
+    "eslint-plugin-richtext-cp": "file:..",
+    "react": "^16.2.0"
+  },
+  "eslintConfig": {
+    "plugins": [
+      "richtext-cp"
+    ]
+  }
+}

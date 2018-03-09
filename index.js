@@ -1,0 +1,59 @@
+function reportAllInstances(node, context, character, message, fix) {
+    var sourceCode = context.getSourceCode();
+    for( var i = 0; i < node.value.length; i++ ) {
+        if(node.value[i] === character) {
+            var startIndex = node.start + i + 1;
+            var endIndex = node.start + i + 2;
+            var loc = {
+                start: sourceCode.getLocFromIndex(startIndex),
+                end: sourceCode.getLocFromIndex(endIndex)
+            }
+            context.report({ node, message, loc,
+                fix: function(fixer) {
+                    return fixer.replaceTextRange([startIndex, endIndex], fix);
+                }
+            });
+        }
+    }
+}
+
+function createRule(character, name, fix) {
+    return {
+        meta: {
+            docs: {
+               description: "Forbid " + name + " characters (" + character + ") within strings."
+            },
+            fixable: true
+        },
+        create: function (context) {
+            return {
+                "Literal": function (node) {
+                    var value = node.value;
+                    if(typeof(value) === 'string') {
+                        var internalIndex = node.value.indexOf(character);
+                        if(internalIndex !== -1) {
+                            var message = "Found " + name + " in string.";
+                            reportAllInstances(node, 
+                                               context, 
+                                               character, 
+                                               message,
+                                               fix);
+                        }
+                    }
+                }
+            }
+        }
+    };
+}
+
+module.exports = {
+    rules: {
+        "non-breaking space": createRule(" ", "non-breaking space", ' '),
+        "em dash": createRule("—", "em dash", '-'),
+        "en dash": createRule("–", "en dash", '-'),
+        "right single quote": createRule("’", "right single quote", "'"),
+        "left single quote": createRule("‘", "left single quote", "'"),
+        "right double quote": createRule("”", "right double quote", '"'),
+        "left double quote": createRule("“", "left double quote", '"')
+    }
+}
