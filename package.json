@@ -1,8 +1,35 @@
 {
-    "name": "eslint-plugin-richtext-cp",
-    "version": "0.1.0",
-    "author": {
-        "name": "Daniel Monego",
-        "url": "https://github.com/dmonego"
-    }
+  "name": "eslint-plugin-richtext-cp",
+  "version": "0.1.0",
+  "author": "Daniel Monego (https://github.com/dmonego)",
+  "description": "An eslint plugin to detect artifacts of copy and paste from rich text systems such as MS Office.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmonego/eslint-plugin-richtext-cp.git"
+  },
+  "keywords": [
+    "office",
+    "richtext",
+    "doc",
+    "document",
+    "excel",
+    "copy",
+    "paste",
+    "copypaste",
+    "eslint",
+    "lint",
+    "characters"
+  ],
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/dmonego/eslint-plugin-richtext-cp/issues"
+  },
+  "homepage": "https://github.com/dmonego/eslint-plugin-richtext-cp#readme"
 }
