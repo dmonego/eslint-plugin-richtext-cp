@@ -1,9 +1,15 @@
 function reportAllInstances(node, context, character, message, fix) {
     var sourceCode = context.getSourceCode();
+    //Most strings have surrounding quotes, JSX elements don't
+    var isQuotedLiteral = (node.end - node.start - node.value.length === 2);
     for( var i = 0; i < node.value.length; i++ ) {
         if(node.value[i] === character) {
-            var startIndex = node.start + i + 1;
-            var endIndex = node.start + i + 2;
+            var startIndex = node.start + i;
+            var endIndex = node.start + i + 1;
+            if(isQuotedLiteral) {
+                startIndex++;
+                endIndex++;
+            }
             var loc = {
                 start: sourceCode.getLocFromIndex(startIndex),
                 end: sourceCode.getLocFromIndex(endIndex)

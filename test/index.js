@@ -2,10 +2,12 @@ var {rules} = require("eslint-plugin-richtext-cp");
 var {RuleTester} = require("eslint");
 
 RuleTester.setDefaultConfig({
-  parserOptions: {
-    ecmaVersion: 6,
-    sourceType: "module"
-  }
+    parser: "babel-eslint",
+    parserOptions: {
+      sourceType: "module",
+      allowImportExportEverywhere: false,
+      codeFrame: false
+    }
 });
 
 var ruleTester = new RuleTester();
@@ -40,4 +42,18 @@ ruleTester.run("no right double quote", rules["right double quote"], {
             output:"var myBadText = '“more text\"'"
         }
     ]
+});
+
+ruleTester.run("no quotes in JSX", rules["left double quote"], { 
+    valid: [
+        'var jsxNode =  (<div>"double quotes"</div>);'
+    ],
+    invalid: [{
+        code: "var jsxNode =  (<div>“double quotes”</div>);",
+        errors: [{
+            message: "Found left double quote in string.",
+            type: "Literal"
+        }],
+        output: 'var jsxNode =  (<div>"double quotes”</div>);'
+    }]
 });
