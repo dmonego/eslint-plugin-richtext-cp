@@ -24,6 +24,7 @@
     "paste",
     "copypaste",
     "eslint",
+    "eslintplugin",
     "lint",
     "characters"
   ],
