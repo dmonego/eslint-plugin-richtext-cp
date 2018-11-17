@@ -1,6 +1,5 @@
 language: node_js
 install:
-  - npm install -g npx
   - cd test
   - npm install
-script: npx babel-node index.js
+script: `npm bin`/babel-node index.js
