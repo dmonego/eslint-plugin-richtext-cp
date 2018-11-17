@@ -1,5 +1,5 @@
-const {rules} = require("eslint-plugin-richtext-cp");
-const {RuleTester} = require("eslint");
+var {rules} = require("eslint-plugin-richtext-cp");
+var {RuleTester} = require("eslint");
 
 RuleTester.setDefaultConfig({
     parser: "babel-eslint",
