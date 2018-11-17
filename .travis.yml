@@ -1,1 +1,4 @@
 language: node_js
+install:
+  - cd test; npm install
+script: cd test; node index.js
