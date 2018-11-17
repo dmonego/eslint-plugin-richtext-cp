@@ -1,9 +1,6 @@
 language: node_js
-node_js:
-  - "node"
-  - "12"
 install:
   - npm install -g npx
   - cd test
   - npm install
-script: npx babel-node --harmony index.js
+script: npx babel-node index.js
