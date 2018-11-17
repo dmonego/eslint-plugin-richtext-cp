@@ -1,4 +1,7 @@
 language: node_js
+node_js:
+  - "node"
+  - "12"
 install:
   - npm install -g npx
   - cd test
