@@ -13,7 +13,9 @@ RuleTester.setDefaultConfig({
 var ruleTester = new RuleTester();
 ruleTester.run("no nbsp rule", rules["non-breaking space"], {
     valid: [
-        "var mytext = 'some   text'"
+        "var mytext = 'some   text'",
+        "var mytext = 'some &nbsp; text'",
+        'var jsxNode =  (<div>non&nbsp; breaking space</div>);'
     ],
     invalid: [{
             code: "var myBadText = 'more    text'",
@@ -44,9 +46,10 @@ ruleTester.run("no right double quote", rules["right double quote"], {
     ]
 });
 
-ruleTester.run("no quotes in JSX", rules["left double quote"], { 
+ruleTester.run("no left double quote", rules["left double quote"], { 
     valid: [
-        'var jsxNode =  (<div>"double quotes"</div>);'
+        'var jsxNode =  (<div>"double quotes"</div>);',
+        'var jsxNode =  (<div>&ldquo;double quotes&rdquo;</div>);'
     ],
     invalid: [{
         code: "var jsxNode =  (<div>“double quotes”</div>);",
@@ -57,3 +60,5 @@ ruleTester.run("no quotes in JSX", rules["left double quote"], {
         output: 'var jsxNode =  (<div>"double quotes”</div>);'
     }]
 });
+
+
