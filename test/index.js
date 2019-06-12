@@ -15,7 +15,7 @@ ruleTester.run("no nbsp rule", rules["non-breaking space"], {
     valid: [
         "var mytext = 'some   text'",
         "var mytext = 'some &nbsp; text'",
-        'var jsxNode =  (<div>non&nbsp; breaking space</div>);'
+        'var jsxNode =  (<div>non&nbsp; breaking space</div>);',
     ],
     invalid: [{
             code: "var myBadText = 'more    text'",
@@ -27,6 +27,14 @@ ruleTester.run("no nbsp rule", rules["non-breaking space"], {
                 message: "Found non-breaking space in string.",
                 type: "Literal"
             }]
+        },
+        {
+            code:'var jsxNode =  (<div>non&nbsp; breaking  space</div>);', 
+            errors: [{
+                message: "Found non-breaking space in string.",
+                type: "Literal"
+            }],
+            output: 'var jsxNode =  (<div>non&nbsp; breaking  space</div>);'
         }
     ]
 });
