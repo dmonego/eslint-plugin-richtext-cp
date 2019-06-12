@@ -2,8 +2,13 @@ function reportAllInstances(node, context, character, message, fix) {
     var sourceCode = context.getSourceCode();
     //Most strings have surrounding quotes, JSX elements don't
     var isQuotedLiteral = (node.end - node.start - node.value.length === 2);
-    for( var i = 0; i < node.value.length; i++ ) {
-        if(node.value[i] === character) {
+    //Don't pick up escaped characters in JSX
+    var hasEscapes = node.value.length < node.end - node.start - 2; 
+    var searchArea = hasEscapes
+        ? node.raw
+        : node.value
+    for( var i = 0; i < searchArea.length; i++ ) {
+        if(searchArea[i] === character) {
             var startIndex = node.start + i;
             var endIndex = node.start + i + 1;
             if(isQuotedLiteral) {
